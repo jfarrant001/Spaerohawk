@@ -1,9 +1,10 @@
 // AD5592R ADC MODULE
-// Revision A
+// Revision IR
 //   Changes:
 //   1) added concantenate_flag reg
 //   2) changed extra_options_reg to not assert DAC range bit
 //   3) added default cases but left empty for now
+
 module ADC_SPI_INTERFACE(
 			SCLK,
 			SDI1,
