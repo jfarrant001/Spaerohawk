@@ -9,6 +9,7 @@ module ADC_SPI_INTERFACE(
 			SDI1,
 			SDO1,
 			SYNC1,
+			serial_read
 			 );
 
 // INPUTS
@@ -16,6 +17,7 @@ input SDO1, SCLK;
 
 // OUTPUTS
 output reg SYNC1, SDI1;
+output reg [127:0] serial_read;
 
 // State Machine
 // State 0 = Configuration
@@ -51,7 +53,6 @@ reg [3:0] count_1;
 reg [15:0] config_reg = 16'b0010_0000_1111_1111;
 reg [15:0] extra_options_reg = 16'b0001_1001_1010_0000; // Modified with Revision A from 16'b0001_1001_1011_0000 to 16'b0001_1001_1010_0000
 reg [15:0] sequence_reg = 16'b0001_0010_1111_1111;
-reg [127:0] serial_read;
 reg concantenate_flag; // Added with Revision A
 integer i;
 
