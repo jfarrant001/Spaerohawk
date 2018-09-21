@@ -19,6 +19,7 @@ module ADC_SPI_INTERFACE_TB();
     /* DUT output signals */
     wire SYNC1;
     wire SDI1;
+	 wire [127:0] serial_read;
     
     integer i;
     
@@ -28,7 +29,8 @@ module ADC_SPI_INTERFACE_TB();
         .SCLK(SCLK),
         .SDI1(SDI1),
         .SDO1(SDO1),
-        .SYNC1(SYNC1)
+        .SYNC1(SYNC1),
+		  .serial_read(serial_read)
     );
 
     initial begin
