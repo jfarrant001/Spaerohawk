@@ -55,7 +55,7 @@ reg [15:0] config_reg = 16'b0010_0000_1111_1111;
 reg [15:0] extra_options_reg = 16'b0001_1001_1010_0000; // Modified with Revision A from 16'b0001_1001_1011_0000 to 16'b0001_1001_1010_0000
 reg [15:0] sequence_reg = 16'b0001_0010_1111_1111;
 reg concantenate_flag; // Added with Revision A
-integer i;
+//integer i;
 
 initial begin
 	state = configuration;
@@ -128,85 +128,117 @@ begin
         end
         
 		adc_0: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_1; // wait 9 cycles
+			end
+		
 			concantenate_flag <= 0;
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH0[i] <= SDO1; 		
-			end
-			SYNC1 <= 1; 
-			#9 next_state <= adc_1; // wait 9 cycles
+			ADC_CH0[count_1] <= SDO1;
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_1: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_2; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH1[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			#9 next_state <= adc_2; // wait 9 cycles
+			ADC_CH1[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_2: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_3; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH2[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			#9 next_state <= adc_3; // wait 9 cycles
+			ADC_CH2[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_3: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_4; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH3[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			#9 next_state <= adc_4; // wait 9 cycles
+			ADC_CH3[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_4: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_5; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH4[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			#9 next_state <= adc_5; // wait 9 cycles
+			ADC_CH4[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_5: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_6; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH5[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			#9 next_state <= adc_6; // wait 9 cycles
+			ADC_CH5[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_6: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				#9 next_state <= adc_7; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH6[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			#9 next_state <= adc_7; // wait 9 cycles
+			ADC_CH6[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
 
 		adc_7: begin
+			if(count_1 == 4'd0)
+			begin
+				SYNC1 <= 1;
+				count_1 <= 4'd15;
+				concantenate_flag <= 1;
+				#9 next_state <= adc_0; // wait 9 cycles
+			end
+		
 			SDI1 <= 0;	// No op mode
 			SYNC1 <= 0;	// Begin
-			for (i=15; i>=0; i=i-1) begin
-			ADC_CH7[i] <= SDO1; 		
-			end
-			SYNC1 <= 1;
-			concantenate_flag <= 1;
-			#9 next_state <= adc_0; // wait 9 cycles
+			ADC_CH7[count_1] <= SDO1; 		
+			count_1 <= count_1 - 4'd1;
 		end
         
         default: begin  // Added with Revision A

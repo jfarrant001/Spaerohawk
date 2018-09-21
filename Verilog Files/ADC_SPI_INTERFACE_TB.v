@@ -43,7 +43,7 @@ module ADC_SPI_INTERFACE_TB();
         for (i=0; i<128; i=i+1)
             #PERIOD SDO1 <= $urandom%2;
 				
-			#(PERIOD*2);
+			#(PERIOD*50);
 			$stop;
     end
     
